@@ -10,8 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.*
 import androidx.core.content.ContextCompat
 import com.treble.appetite.R
-import com.treble.appetite.camera.data.CameraRepository
-import com.treble.appetite.camera.data.ImageEntity
+import com.treble.appetite.camera.data.ImageDAL
 import kotlinx.android.synthetic.main.activity_camera.*
 import org.koin.android.ext.android.inject
 import java.io.File
@@ -25,8 +24,6 @@ class CameraActivity : AppCompatActivity() {
     companion object {
         const val EXTRA_IMAGE_ID = "EXTRA_IMAGE_ID"
     }
-
-    private val cameraRepository: CameraRepository by inject()
 
     override fun onRequestPermissionsResult(
         requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
@@ -84,9 +81,8 @@ class CameraActivity : AppCompatActivity() {
                         Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
 
                         // Set the result and return
-                        val id = cameraRepository.insertImage(file.absolutePath)
                         val dataIntent = Intent()
-                        dataIntent.putExtra(EXTRA_IMAGE_ID, id)
+                        dataIntent.putExtra(EXTRA_IMAGE_ID, file.absolutePath)
                         setResult(RESULT_OK, dataIntent)
                     }
                 })

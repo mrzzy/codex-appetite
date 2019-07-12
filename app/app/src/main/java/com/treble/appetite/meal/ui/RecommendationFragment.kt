@@ -1,4 +1,4 @@
-package com.treble.appetite.meal
+package com.treble.appetite.meal.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
