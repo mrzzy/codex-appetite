@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">APPetite</string>
+
+    <string name="api_endpoint"></string>
 </resources>

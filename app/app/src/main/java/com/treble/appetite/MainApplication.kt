@@ -18,6 +18,8 @@ class MainApplication : Application() {
             androidContext(this@MainApplication)
 
             androidFileProperties()
+
+            modules(apiModule)
         }
     }
 }
