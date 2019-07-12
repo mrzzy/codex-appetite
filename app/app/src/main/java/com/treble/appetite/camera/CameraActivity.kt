@@ -10,13 +10,23 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.*
 import androidx.core.content.ContextCompat
 import com.treble.appetite.R
+import com.treble.appetite.camera.data.CameraRepository
+import com.treble.appetite.camera.data.ImageEntity
 import kotlinx.android.synthetic.main.activity_camera.*
+import org.koin.android.ext.android.inject
 import java.io.File
 
 private const val REQUEST_CODE_PERMISSIONS = 10
 private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+const val RESULT_FAIL = 0
+const val RESULT_OK = 1
 
 class CameraActivity : AppCompatActivity() {
+    companion object {
+        const val EXTRA_IMAGE_ID = "EXTRA_IMAGE_ID"
+    }
+
+    private val cameraRepository: CameraRepository by inject()
 
     override fun onRequestPermissionsResult(
         requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
@@ -65,11 +75,19 @@ class CameraActivity : AppCompatActivity() {
                         val msg = "Photo capture failed: $message"
                         Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
                         exc?.printStackTrace()
+                        setResult(RESULT_FAIL)
+                        finish()
                     }
 
                     override fun onImageSaved(file: File) {
                         val msg = "Photo capture succeeded: ${file.absolutePath}"
                         Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+
+                        // Set the result and return
+                        val id = cameraRepository.insertImage(file.absolutePath)
+                        val dataIntent = Intent()
+                        dataIntent.putExtra(EXTRA_IMAGE_ID, id)
+                        setResult(RESULT_OK, dataIntent)
                     }
                 })
         }
