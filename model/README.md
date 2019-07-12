@@ -7,4 +7,4 @@ After that it computes portion by computing the area that has been segmented out
 together adjusted by the distance from the camera.
 
 ## Depedencies
-Food Portion Model uses DeepLab model to perform image segmentation
+Food Portion Model uses MaskRCNN model to perform image segmentation
