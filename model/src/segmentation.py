@@ -14,6 +14,7 @@ from mrcnn import utils
 import mrcnn.model as modellib
 from mrcnn import visualize
 from samples.coco import coco
+from skimage.transform import resize
 
 # Mask RCNN 
 class Model:
@@ -58,3 +59,13 @@ class Model:
         classes = [ self.class_names[i] for i in  class_ids ]
 
         return masks, scores, classes
+
+if __name__ == "__main__":
+    model = Model("models/mask_rcnn_coco.h5")
+    img = skimage.io.imread("pizza.jpg")
+    ax = plt.gca()
+    results = model.model.detect([img], verbose=1)[0]
+    visualize.display_instances(img, results["rois"], results["masks"],
+                                results["class_ids"], Model.class_names,
+                                results["scores"], ax=ax)
+    plt.savefig("seg.jpg")

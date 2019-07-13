@@ -8,22 +8,10 @@ import skimage
 import numpy as np
 from flask import Flask, flash, request, redirect, url_for
 app = Flask(__name__)
-app.config["UPLOAD_FOLDER"] = "/tmp/"
-
-import segmentation
-model = None
 
 def process_file(f):
     img = skimage.io.imread(f.stream)
     return model.predict(img)
-
-def top_mask(results):
-    masks, scores, classes = results
-    top_i = np.argmax(scores)
-    return masks[:, :, top_i]
-
-def weighted_mask(mask):
-    return np.sum(mask) / np.prod(mask.shape)
 
 def diff(before, after):
     b_mask = top_mask(before)
