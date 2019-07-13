@@ -8,7 +8,7 @@ import java.util.*
 
 @Entity
 data class MealEntity(
-    @PrimaryKey(autoGenerate = true) var id: Int,
+    @PrimaryKey(autoGenerate = true) var id: Long,
     @Nullable
     var mealDate: Date?,
     var beforeImagePath: String,

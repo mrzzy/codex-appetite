@@ -32,6 +32,7 @@ class CameraActivity : AppCompatActivity() {
                 Toast.makeText(baseContext,
                     "Permissions not granted by the user.",
                     Toast.LENGTH_SHORT).show()
+                finish()
             }
         }
     }
@@ -41,7 +42,9 @@ class CameraActivity : AppCompatActivity() {
     }
 
     private fun startCamera() {
-        val previewConfig = PreviewConfig.Builder().build()
+        val previewConfig = PreviewConfig.Builder().apply{
+            setLensFacing(CameraX.LensFacing.BACK)
+        }.build()
         val preview = Preview(previewConfig)
 
         preview.setOnPreviewOutputUpdateListener {
@@ -82,6 +85,7 @@ class CameraActivity : AppCompatActivity() {
                         val dataIntent = Intent()
                         dataIntent.putExtra(EXTRA_IMAGE_ID, file.absolutePath)
                         setResult(RESULT_OK, dataIntent)
+                        finish()
                     }
                 })
         }
