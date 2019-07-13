@@ -7,4 +7,7 @@ interface MealDAL {
     fun getPreviousMeals(): List<Meal>
     fun addMeal(beforeImagePath: String): Long
     fun updateMeal(id: Long, afterImagePath: String)
+
+    fun setPortion(newPortion: Int)
+    fun getPortion(): Int
 }

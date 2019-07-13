@@ -8,4 +8,8 @@ class MealRepository(
 ) {
     fun getLastMeal(): Meal = mealDAL.getLastMeal()
     fun getPreviousMeals(): List<Meal> = mealDAL.getPreviousMeals()
+
+    fun getRecommendedPortion(): Int {
+
+    }
 }
