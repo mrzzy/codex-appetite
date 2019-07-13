@@ -5,4 +5,6 @@
 
     <string name="past_meals">Past meals</string>
     <string name="past_meals_no_meals">You don\'t have any past meals</string>
+
+    <string name="current_meal">Current Meal</string>
 </resources>
