@@ -8,8 +8,9 @@ class MealRepository(
 ) {
     fun getLastMeal(): Meal = mealDAL.getLastMeal()
     fun getPreviousMeals(): List<Meal> = mealDAL.getPreviousMeals()
+    fun addMeal(beforeImagePath: String): Long = mealDAL.addMeal(beforeImagePath)
+    fun updateMeal(id: Long, afterImagePath: String) = mealDAL.updateMeal(id, afterImagePath)
 
-    fun getRecommendedPortion(): Int {
-
-    }
+    fun getRecommendedPortion(): Int = mealDAL.getPortion()
+    fun setRecommendedPortion(portion: Int) = mealDAL.setPortion(portion)
 }
