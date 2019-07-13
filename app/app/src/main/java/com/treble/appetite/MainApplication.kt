@@ -2,6 +2,7 @@ package com.treble.appetite
 
 import android.app.Application
 import com.treble.appetite.api.apiModule
+import com.treble.appetite.meal.mealModules
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidFileProperties
 import org.koin.android.ext.koin.androidLogger
@@ -19,7 +20,7 @@ class MainApplication : Application() {
 
             androidFileProperties()
 
-            modules(apiModule)
+            modules(listOf(apiModule, mealModules))
         }
     }
 }

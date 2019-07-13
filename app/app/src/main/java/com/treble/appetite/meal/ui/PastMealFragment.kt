@@ -7,15 +7,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.treble.appetite.R
+import com.treble.appetite.meal.data.MealRepository
 import kotlinx.android.synthetic.main.fragment_past_meal.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.android.ext.android.inject
 
 class PastMealFragment : Fragment() {
-    private val pastMealViewModel by viewModel<PastMealViewModel>()
+    private val mealRepository: MealRepository by inject()
+    private lateinit var pastMealViewModel: PastMealViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        pastMealViewModel = ViewModelProviders.of(this,
+            MealViewModelFactory(mealRepository)
+        ).get(PastMealViewModel::class.java)
+
         return inflater.inflate(R.layout.fragment_past_meal, container, false)
     }
 
