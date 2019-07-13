@@ -43,10 +43,10 @@ class Model:
                    'teddy bear', 'hair drier', 'toothbrush']
 
     # load maskrcnnn model for inference
-    def __init__(self):
+    def __init__(self, model_path):
         config = self.InferenceConfig()
         self.model = modellib.MaskRCNN(mode="inference", model_dir="logs" , config=config)
-        self.model.load_weights("models/mask_rcnn_coco.h5", by_name=True)
+        self.model.load_weights(model_path, by_name=True)
 
     # perform segmentation on the given image returning the segmentation masks,
     # scores, labels, and classes

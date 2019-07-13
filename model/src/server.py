@@ -44,5 +44,5 @@ def api_portion_diff():
     return str(diff(before, after))
 
 if __name__ == "__main__":
-    model = segmentation.Model()
+    model = segmentation.Model("models/mask_rcnn_coco.h5")
     app.run("0.0.0.0", port=8080, threaded=False)
