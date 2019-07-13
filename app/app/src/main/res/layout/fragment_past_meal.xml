@@ -9,14 +9,22 @@
     <TextView android:id="@+id/textview_past_meals"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
+              android:text="@string/past_meals"
               app:layout_constraintTop_toTopOf="parent"
               app:layout_constraintStart_toStartOf="parent"
-              android:textSize="24sp" />
+              style="@style/heading" />
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_images"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/textview_past_meals"
-            app:layout_constraintStart_toStartOf="parent"
-    />
+            app:layout_constraintStart_toStartOf="parent" />
+    <TextView android:id="@+id/textview_no_past_meals"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:visibility="gone"
+              android:text="@string/past_meals_no_meals"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toBottomOf="@id/recyclerview_images"
+              style="@style/secondary_heading" />
 </androidx.constraintlayout.widget.ConstraintLayout>

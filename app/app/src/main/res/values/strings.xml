@@ -2,4 +2,7 @@
     <string name="app_name">APPetite</string>
 
     <string name="api_endpoint"></string>
+
+    <string name="past_meals">Past meals</string>
+    <string name="past_meals_no_meals">You don\'t have any past meals</string>
 </resources>

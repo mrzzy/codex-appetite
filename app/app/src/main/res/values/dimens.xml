@@ -2,4 +2,7 @@
 <resources>
     <dimen name="content_margin">16dp</dimen>
     <dimen name="text_top_margin">2dp</dimen>
+
+    <dimen name="text_primary">24sp</dimen>
+    <dimen name="text_secondary">20sp</dimen>
 </resources>

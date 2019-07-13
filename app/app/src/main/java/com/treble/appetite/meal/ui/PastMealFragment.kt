@@ -29,7 +29,11 @@ class PastMealFragment : Fragment() {
 
         // Set an observer on the Feed LiveData for when the data is ready
         pastMealViewModel.imagesLiveData.observe(this, Observer<List<Bitmap>> {
-            viewAdapter.setImages(it)
+            if (it.count() == 0) {
+                textview_no_past_meals.visibility = View.VISIBLE
+            } else {
+                viewAdapter.setImages(it)
+            }
         })
 
         recyclerview_images.apply {
