@@ -7,13 +7,13 @@ RUN mkdir -p deps/mask_rcnn
 COPY deps/mask_rcnn/requirements.txt deps/mask_rcnn/requirements.txt
 
 RUN pip install -r deps/mask_rcnn/requirements.txt
-RUN pip install flask
+RUN pip install flask keras pillow matplotlib scikit-learn scikit-image opencv-python pydot GraphViz
 
 # install pycocotools
 RUN git clone https://github.com/waleedka/coco /tmp/pycoco
 RUN cd /tmp/pycoco/PythonAPI && make && make install && python setup.py install
 
 COPY . /tf
-ENV PYTHONPATH=deps/mask_rcnn:${PYTHONPATH}
+ENV PYTHONPATH=deps/mask_rcnn:deps/dense_depth:${PYTHONPATH}
 
 ENTRYPOINT bash
