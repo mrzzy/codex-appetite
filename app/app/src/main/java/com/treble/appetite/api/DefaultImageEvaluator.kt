@@ -8,7 +8,7 @@ class DefaultImageEvaluator(
     val apiEndpoint: String
 ) : ImageEvaluator {
     override suspend fun evaluateImages(beforePath: String, afterPath: String): Int {
-        val images = listOf<ImagePart>(
+        val images = listOf(
             ImagePart(beforePath, "before"),
             ImagePart(afterPath, "after")
         )

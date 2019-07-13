@@ -3,8 +3,12 @@ package com.treble.appetite
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.treble.appetite.api.ImageEvaluator
 import com.treble.appetite.camera.CameraActivity
+import com.treble.appetite.http.ImagePart
+import com.treble.appetite.http.Webservice
 import com.treble.appetite.meal.data.MealRepository
+import com.treble.appetite.meal.model.Meal
 import com.treble.appetite.meal.ui.CurrentMealFragment
 import com.treble.appetite.meal.ui.RecommendationFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -15,6 +19,7 @@ class MainActivity : AppCompatActivity() {
     private val mealRepository: MealRepository by inject()
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+    private val imageEvaluator: ImageEvaluator by inject()
 
     private val REQUEST_CODE_NEW_MEAL = 0
     private val REQUEST_CODE_FINISH_MEAL = 1
@@ -71,6 +76,13 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     val currentMeal = mealRepository.getCurrentMeal()
                     mealRepository.updateMeal(currentMeal!!.id, filePath)
+
+                    val finishedMeal = mealRepository.getMeal(currentMeal.id)!!
+                    imageEvaluator.evaluateImages(
+                        finishedMeal.beforeImagePath,
+                        finishedMeal.afterImagePath!!
+                    )
+
                     withContext(Dispatchers.Main) { showRecommendation() }
                 }
             }

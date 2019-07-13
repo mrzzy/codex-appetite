@@ -12,6 +12,8 @@ class RoomDAL(private val database: MealDatabase) : MealDAL {
         return meal?.toMeal()
     }
 
+    override fun getMeal(id: Long): Meal? = database.mealDao().getMeal(id)?.toMeal()
+
     override fun getPreviousMeals(): List<Meal> = database.mealDao().getPreviousMeals().map { it.toMeal() }
 
     override fun addMeal(beforeImagePath: String): Long {

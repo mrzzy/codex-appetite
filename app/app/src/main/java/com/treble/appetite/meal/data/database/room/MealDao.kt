@@ -10,6 +10,9 @@ interface MealDao {
     @Insert
     fun insertMeal(meal: MealEntity): Long
 
+    @Query("SELECT * FROM mealentity WHERE id = :id")
+    fun getMeal(id: Long): MealEntity?
+
     @Query("SELECT * FROM mealentity WHERE afterImagePath IS NULL ORDER BY mealDate DESC LIMIT 1")
     fun getCurrentMeal(): MealEntity?
 

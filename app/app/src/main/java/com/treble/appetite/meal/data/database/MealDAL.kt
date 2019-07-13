@@ -4,6 +4,7 @@ import com.treble.appetite.meal.model.Meal
 
 interface MealDAL {
     fun getCurrentMeal(): Meal?
+    fun getMeal(id: Long): Meal?
     fun hasCurrentMeal(): Boolean
     fun getPreviousMeals(): List<Meal>
     fun addMeal(beforeImagePath: String): Long

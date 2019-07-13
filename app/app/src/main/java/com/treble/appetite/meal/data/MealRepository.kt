@@ -8,6 +8,7 @@ class MealRepository(
 ) {
     fun getCurrentMeal(): Meal? = mealDAL.getCurrentMeal()
     fun getPreviousMeals(): List<Meal> = mealDAL.getPreviousMeals()
+    fun getMeal(id: Long): Meal? = mealDAL.getMeal(id)
     fun addMeal(beforeImagePath: String): Long = mealDAL.addMeal(beforeImagePath)
     fun updateMeal(id: Long, afterImagePath: String) = mealDAL.updateMeal(id, afterImagePath)
 
