@@ -5,7 +5,12 @@ import com.treble.appetite.meal.model.Meal
 import java.util.*
 
 class RoomDAL(private val database: MealDatabase) : MealDAL {
-    override fun getLastMeal(): Meal = database.mealDao().getLastMeal().toMeal()
+    override fun hasCurrentMeal(): Boolean = getCurrentMeal() != null
+
+    override fun getCurrentMeal(): Meal? {
+        val meal = database.mealDao().getCurrentMeal()
+        return meal?.toMeal()
+    }
 
     override fun getPreviousMeals(): List<Meal> = database.mealDao().getPreviousMeals().map { it.toMeal() }
 
@@ -19,8 +24,8 @@ class RoomDAL(private val database: MealDatabase) : MealDAL {
     }
 
     override fun setPortion(newPortion: Int) {
-        database.portionDao().savePortion(newPortion)
+        database.portionDao().savePortion(PortionEntity(newPortion))
     }
 
-    override fun getPortion(): Int = database.portionDao().getPortion().portion
+    override fun getPortion(): Int? = database.portionDao().getPortion()?.portion
 }

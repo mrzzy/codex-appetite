@@ -28,7 +28,8 @@ class RecommendationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         recommendationViewModel.portionLiveData.observe(this, Observer {
-            textview_meal_grams.text = it.toString()
+            val text = it?.toString() ?: "700"
+            textview_meal_grams.text = text + "g"
         })
     }
 }

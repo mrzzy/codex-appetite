@@ -8,8 +8,8 @@ import androidx.room.Query
 @Dao
 interface PortionDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun savePortion(portion: Int)
+    fun savePortion(portion: PortionEntity)
 
     @Query("SELECT * FROM portionentity")
-    fun getPortion(): PortionEntity
+    fun getPortion(): PortionEntity?
 }

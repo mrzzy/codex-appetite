@@ -10,9 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.*
 import androidx.core.content.ContextCompat
 import com.treble.appetite.R
-import com.treble.appetite.camera.data.ImageDAL
 import kotlinx.android.synthetic.main.activity_camera.*
-import org.koin.android.ext.android.inject
 import java.io.File
 
 private const val REQUEST_CODE_PERMISSIONS = 10

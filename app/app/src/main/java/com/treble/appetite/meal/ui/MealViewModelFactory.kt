@@ -10,6 +10,8 @@ class MealViewModelFactory(private val mealRepository: MealRepository) : ViewMod
             PastMealViewModel(mealRepository) as T
         } else if (modelClass.isAssignableFrom(RecommendationViewModel::class.java)) {
             RecommendationViewModel(mealRepository) as T
+        } else if (modelClass.isAssignableFrom(CurrentMealViewModel::class.java)) {
+            CurrentMealViewModel(mealRepository) as T
         } else {
             throw IllegalArgumentException("ViewModel Not Found")
         }
