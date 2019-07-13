@@ -27,11 +27,10 @@ class Model:
         x = np.stack([np.clip(np.asarray(image, dtype=float) / 255, 0, 1)], axis=0)
         # perform prediction with model
         depth_map = predict(self.model, x, minDepth=10, maxDepth=1000, batch_size=2)
-        # revert the shape of the image original
-        depth_map = resize(image, orig_shape, order=1, preserve_range=1, anti_aliasing=True)
-
-        return depth_map
-
+        # revert the shape of the image original :-1 to remove channel dimension
+        depth_map = resize(depth_map, orig_shape[:-1] + (1,), order=1,
+                           preserve_range=1, anti_aliasing=True)
+        return np.squeeze(depth_map)
 
 if __name__ == "__main__":
     model = Model("models/dense_depth_nyu.h5")
