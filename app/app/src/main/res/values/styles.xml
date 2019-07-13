@@ -20,4 +20,9 @@
         <item name="android:textColor">@color/colorFontSecondary</item>
         <item name="android:textSize">@dimen/text_secondary</item>
     </style>
+
+    <style name="hero">
+        <item name="android:textColor">@color/colorFontPrimary</item>
+        <item name="android:textSize">@dimen/text_hero</item>
+    </style>
 </resources>

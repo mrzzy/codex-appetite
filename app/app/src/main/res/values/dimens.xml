@@ -5,4 +5,5 @@
 
     <dimen name="text_primary">24sp</dimen>
     <dimen name="text_secondary">20sp</dimen>
+    <dimen name="text_hero">60sp</dimen>
 </resources>

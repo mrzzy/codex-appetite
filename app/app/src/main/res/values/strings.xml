@@ -7,4 +7,7 @@
     <string name="past_meals_no_meals">You don\'t have any past meals</string>
 
     <string name="current_meal">Current Meal</string>
+
+    <string name="recommendation_title">Your recommended portion</string>
+    <string name="recommendation_subtitle">Show this to your vendor</string>
 </resources>
