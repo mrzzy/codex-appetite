@@ -1,7 +1,5 @@
 package com.treble.appetite.meal.ui
 
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.treble.appetite.meal.data.MealRepository
@@ -9,7 +7,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import java.io.File
 
 class RecommendationViewModel(
     mealRepository: MealRepository
@@ -17,24 +14,13 @@ class RecommendationViewModel(
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    val imagesLiveData = MutableLiveData<List<Bitmap>>()
-
-    private fun createBitmap(filePath: String): Bitmap {
-        val image = File(filePath)
-        val bmOptions = BitmapFactory.Options()
-        return BitmapFactory.decodeFile(image.absolutePath, bmOptions)
-    }
+    val portionLiveData = MutableLiveData<Int>()
 
     init {
         uiScope.launch(Dispatchers.IO) {
-            val imageBitmaps = mealRepository.getPreviousMeals().map {
-                createBitmap(it.beforeImagePath)
-            }
-
-            imagesLiveData.postValue(imageBitmaps)
+            portionLiveData.postValue(mealRepository.getRecommendedPortion())
         }
     }
-
 
     override fun onCleared() {
         super.onCleared()
