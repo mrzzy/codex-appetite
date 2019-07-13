@@ -46,6 +46,7 @@ class PastMealFragment : Fragment() {
         recyclerview_images.apply {
             layoutManager = viewManager
             adapter = viewAdapter
+            isNestedScrollingEnabled = true
         }
     }
 }
