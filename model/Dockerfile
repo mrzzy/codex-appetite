@@ -7,6 +7,7 @@ RUN mkdir -p deps/mask_rcnn
 COPY deps/mask_rcnn/requirements.txt deps/mask_rcnn/requirements.txt
 
 RUN pip install -r deps/mask_rcnn/requirements.txt
+RUN pip install flask
 
 # install pycocotools
 RUN git clone https://github.com/waleedka/coco /tmp/pycoco

@@ -11,6 +11,6 @@ run:
 	docker run -it \
 		-u $(shell id -u):$(shell id - GID g) \
 		-v $(shell pwd):/tf \
-		-p 8888:8888 \
+		-p 8080:8080 \
 		--runtime nvidia \
 		codex-appetite-model 

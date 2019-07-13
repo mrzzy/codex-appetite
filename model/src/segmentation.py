@@ -44,7 +44,7 @@ class Model:
 
     # load maskrcnnn model for inference
     def __init__(self):
-        config = InferenceConfig()
+        config = self.InferenceConfig()
         self.model = modellib.MaskRCNN(mode="inference", model_dir="logs" , config=config)
         self.model.load_weights("models/mask_rcnn_coco.h5", by_name=True)
 
@@ -54,7 +54,7 @@ class Model:
         results = self.model.detect([ image], verbose=1)
         # unpack results
         r = results[0]
-        masks, scores, class_ids = r["mask"], r["score"], r["class_ids"]
-        classes = [ class_names[i] for i in  class_ids ]
+        masks, scores, class_ids = r["masks"], r["scores"], r["class_ids"]
+        classes = [ self.class_names[i] for i in  class_ids ]
 
         return masks, scores, classes
