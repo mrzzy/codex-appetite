@@ -17,36 +17,40 @@ class MainActivity : AppCompatActivity() {
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     private val REQUEST_CODE_NEW_MEAL = 0
-    private val REQUEST_CODE_FINISH_MEAL = 0
+    private val REQUEST_CODE_FINISH_MEAL = 1
+
+    private fun showCurrentMeal() {
+        val currentMealFragment = CurrentMealFragment()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.top_fragment, currentMealFragment)
+            .commit()
+
+        fab.setOnClickListener {
+            val intent = Intent(baseContext, CameraActivity::class.java)
+            startActivityForResult(intent, REQUEST_CODE_FINISH_MEAL)
+        }
+    }
+
+    private fun showRecommendation() {
+        val recommendationFragment = RecommendationFragment()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.top_fragment, recommendationFragment)
+            .commit()
+
+        fab.setOnClickListener {
+            val intent = Intent(baseContext, CameraActivity::class.java)
+            startActivityForResult(intent, REQUEST_CODE_NEW_MEAL)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         uiScope.launch(Dispatchers.IO) {
             if (mealRepository.hasCurrentMeal()) {
-                withContext(Dispatchers.Main) {
-                    val currentMealFragment = CurrentMealFragment()
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.top_fragment, currentMealFragment)
-                        .commit()
-
-                    fab.setOnClickListener {
-                        val intent = Intent(baseContext, CameraActivity::class.java)
-                        startActivityForResult(intent, REQUEST_CODE_FINISH_MEAL)
-                    }
-                }
+                withContext(Dispatchers.Main) { showCurrentMeal() }
             } else {
-                withContext(Dispatchers.Main) {
-                    val recommendationFragment = RecommendationFragment()
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.top_fragment, recommendationFragment)
-                        .commit()
-
-                    fab.setOnClickListener {
-                        val intent = Intent(baseContext, CameraActivity::class.java)
-                        startActivityForResult(intent, REQUEST_CODE_NEW_MEAL)
-                    }
-                }
+                withContext(Dispatchers.Main) { showRecommendation() }
             }
         }
 
@@ -63,9 +67,11 @@ class MainActivity : AppCompatActivity() {
             uiScope.launch(Dispatchers.IO) {
                 if (requestCode == REQUEST_CODE_NEW_MEAL) {
                     mealRepository.addMeal(filePath)
+                    withContext(Dispatchers.Main) { showCurrentMeal() }
                 } else {
                     val currentMeal = mealRepository.getCurrentMeal()
                     mealRepository.updateMeal(currentMeal!!.id, filePath)
+                    withContext(Dispatchers.Main) { showRecommendation() }
                 }
             }
         }
