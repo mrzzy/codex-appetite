@@ -49,16 +49,16 @@ class Model:
         self.model = modellib.MaskRCNN(mode="inference", model_dir="logs" , config=config)
         self.model.load_weights(model_path, by_name=True)
 
-    # perform segmentation on the given image returning the segmentation masks,
-    # scores, labels, and classes
+    # perform segmentation on the given image returning the bouding boxesf
+    #segmentation masks, scores, labels, and classes
     def predict(self, image):
         results = self.model.detect([ image], verbose=1)
         # unpack results
         r = results[0]
-        masks, scores, class_ids = r["masks"], r["scores"], r["class_ids"]
+        boxes, masks, scores, class_ids = r["rois"], r["masks"], r["scores"], r["class_ids"]
         classes = [ self.class_names[i] for i in  class_ids ]
 
-        return masks, scores, classes
+        return boxes, masks, scores, classes
 
 if __name__ == "__main__":
     model = Model("models/mask_rcnn_coco.h5")
